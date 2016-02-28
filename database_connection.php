@@ -2,9 +2,12 @@
 
 $servername = "sdp.db";
 $username = "khalidalawar";
-$password = "khalid7";
+$password = "toor";
 
 $conn = mysql_connect($servername, $username, $password);
+
+mysql_select_db('SDP');
+
 
 // Check connection
 if (!$conn) {
