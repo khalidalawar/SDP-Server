@@ -13,5 +13,5 @@ mysql_select_db('SDP');
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-echo "Connected successfully";
+else echo "Connected successfully";
 ?>
