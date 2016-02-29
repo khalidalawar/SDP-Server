@@ -17,21 +17,40 @@ $fname= $_POST['fname'];
 $lname= $_POST['lname'];
 $email= $_POST['email'];
 $pass= $_POST['pass'];
+$phone = $_POST['phone'];
 
 
-echo $email . '\n';
-echo $pass . '\n';
-create_user($uname,$fname,$lname,$email,$pass,$prof_id,$acctype_id,$acc_statid);
+create_profile($fname,$lname);
+create_user($uname,$fname,$lname,$email,$pass,$phone,$prof_id,$acctype_id,$acc_statid);
 
 }
 
-function create_user($uname,$fname,$lname,$email,$pass,$prof_id,$acctype_id,$acc_statid){
+function create_profile($fname,$lname){
+    $sql = "INSERT INTO PROFILES (name) VALUES ('" . $fname ." ". $lname . "')";
+    if (mysql_query($sql) === TRUE) {
+            echo "New profile created successfully";
+        } else {   
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    $sql = "SELECT SCOPE_IDENTITY()";
+     if (mysql_query($sql) === TRUE) {
+            echo "New profile created successfully";
+        } else {   
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+        
+            
+        
+        
+}
+
+function create_user($uname,$fname,$lname,$email,$pass,$phone , $prof_id,$acctype_id,$acc_statid){
     
-     $sql = "INSERT INTO USER_ACCOUNTS (uname, fname, lname,email,pass,prof_id,acctype_id,acc_statid) VALUES ('" . $uname . "', '" . $fname . "','" . $lname . "', '" . $email . "','" . $pass . "',1,2,3)";
+     $sql = "INSERT INTO USER_ACCOUNTS (uname, fname, lname , email , phone_number , pass , prof_id , acctype_id , acc_statid ) VALUES ('" . $uname . "', '" . $fname . "','" . $lname . "', '" . $email . "','" . $phone . "','" . $pass . "',1,2,3)";
 
         if (mysql_query($sql) === TRUE) {
             echo "New record created successfully";
-        } else {
+        } else {   
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
 
