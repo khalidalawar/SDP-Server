@@ -8,8 +8,17 @@ echo $request_type;
 
 if($request_type == "create_user"){
        create_user_request();    
+}else if($request_type == "authenticate_user"){
+    authenticate_user_request();
 }
 
+function authenticate_user_request(){
+     $uname = $_POST['uname'];
+      $pass = $_POST['pass'];
+      
+      authenticate_user($uname,$pass);
+      
+}
 
 function create_user_request(){
     $uname = $_POST['uname'];
@@ -59,13 +68,22 @@ function create_user($uname,$fname,$lname,$email,$pass,$phone , $prof_id,$acctyp
 
 
 function authenticate_user($uname,$pass){
+    
+    echo "(".$uname . " , " . $pass ." )";
     $sql = "SELECT * FROM USER_ACCOUNTS WHERE uname='".$uname."' AND pass='".$pass."'";
     $result = mysql_query($sql);
-    if ($result === TRUE) {
-            echo "New record created successfully";
-        } else {   
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
+    
+    if (mysql_num_rows($result)==0) {  
+        
+        
+        
+     }else{
+
+            while($row = mysql_fetch_array($result)) {
+                print_r($row);
+            }
+     }
+   
     
 }
 
