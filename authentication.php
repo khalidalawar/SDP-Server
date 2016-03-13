@@ -34,7 +34,7 @@ function create_profile($fname,$lname){
         }
     $sql = "SELECT SCOPE_IDENTITY()";
      if (mysql_query($sql) === TRUE) {
-            echo "New profile created successfully";
+            echo "retrieved last ID  successfully";
         } else {   
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
@@ -54,6 +54,18 @@ function create_user($uname,$fname,$lname,$email,$pass,$phone , $prof_id,$acctyp
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
 
+    
+}
+
+
+function authenticate_user($uname,$pass){
+    $sql = "SELECT * FROM USER_ACCOUNTS WHERE uname='".$uname."' AND pass='".$pass."'";
+    $result = mysql_query($sql);
+    if ($result === TRUE) {
+            echo "New record created successfully";
+        } else {   
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
     
 }
 
