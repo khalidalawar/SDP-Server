@@ -9,30 +9,29 @@ echo $request_type;
 $prof_id = 0;
 
 if($request_type == "create_user"){
-       create_user_request();    
+    create_user_request();    
 }else if($request_type == "authenticate_user"){
     authenticate_user_request();
 }
 
 function authenticate_user_request(){
-     $uname = $_POST['uname'];
-      $pass = $_POST['pass'];
-      
-      authenticate_user($uname,$pass);
+    $uname = $_POST['uname'];
+    $pass = $_POST['pass'];      
+    authenticate_user($uname,$pass);
       
 }
 
 function create_user_request(){
     $uname = $_POST['uname'];
-$fname= $_POST['fname'];
-$lname= $_POST['lname'];
-$email= $_POST['email'];
-$pass= $_POST['pass'];
-$phone = $_POST['phone'];
+    $fname= $_POST['fname'];
+    $lname= $_POST['lname'];
+    $email= $_POST['email'];
+    $pass= $_POST['pass'];
+    $phone = $_POST['phone'];
 
 
-create_profile($fname,$lname);
-create_user($uname,$fname,$lname,$email,$pass,$phone,$prof_id,$acctype_id,$acc_statid);
+    create_profile($fname,$lname);
+    create_user($uname,$fname,$lname,$email,$pass,$phone,$prof_id,$acctype_id,$acc_statid);
 
 }
 
