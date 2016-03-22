@@ -1,6 +1,6 @@
 <?php
 
-include 'database_connection.php';
+include_once 'database_connection.php';
 
 $request_type = $_POST['request_type'];
 
@@ -33,7 +33,9 @@ function authenticate_token($token){
     echo "\ncurtime: ". $curtime;
     
     if(($curtime - $time) > 300){
-        echo '\nnew';
+        echo '\nok';
+    }else{
+        echo 'no';
     }
     
 }
