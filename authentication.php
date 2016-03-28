@@ -15,6 +15,8 @@ if($request_type == "create_user"){
 }else if($request_type == "authenticate_user"){
     authenticate_user_request();
 }else{
+    
+    
     $token = $_POST['token'];
     $auth = authenticate_token($token);
 }
@@ -29,11 +31,11 @@ function authenticate_token($token){
     $time = strtotime($time);
 
     $curtime = time();
-    echo "time " . $time;
-    echo "\ncurtime: ". $curtime;
+//    echo "time " . $time;
+//    echo "\ncurtime: ". $curtime;
     
     if(($curtime - $time) > 300){
-        echo '\nok';
+ //       echo '\nok';
     }else{
         echo 'no';
     }
