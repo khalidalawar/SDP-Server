@@ -1,9 +1,8 @@
 
 
 <?php
-$firstName = $_POST["firstName"];
-$lastName = $_POST["lastName"];
-$userId = $_POST["userId"];
+$type = $_POST["type"];
+$uname = $_POST["uname"];
 
 $target_dir = "uploads";
 if(!file_exists($target_dir))
