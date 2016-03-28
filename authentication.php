@@ -1,10 +1,16 @@
 <?php
 
+
 include_once 'database_connection.php';
+
 
 $request_type = $_POST['request_type'];
 
 //echo $request_type;
+
+
+
+
 
 $prof_id = 0;
 $token = "";
@@ -136,7 +142,10 @@ function authenticate_user($uname,$pass){
                             $update_query = "UPDATE USER_ACCOUNTS SET tokid='". $tokid ."' WHERE uname='".$uname . "'";
                             if (mysql_query($update_query) === TRUE) {
                               //  echo "tokid updated successfully";
-                                    echo $rand_string;
+                                    echo json_encode([
+                                    "uname" => $uname,
+                                    "token" => $rand_string
+                                    ]);
                             }else {   
                                 echo "Error: " . $update_query . "<br>" . $conn->error;
                             }
