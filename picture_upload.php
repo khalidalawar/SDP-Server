@@ -8,10 +8,24 @@
 //variable accid: with the user's account ID
 //
 //in case 'type' = "job" :::
-//also expects a value jobId which is the jobid
+//also expects a value jobId which is the jobid insted of accid
 
 if(isset($_FILES['file'])){
+    $uploadOk = 1;
+    
+    if(getimagesize($_FILES["image"]["tmp_name"]) === false){
+        echo "File is not an image.";
+        $uploadOk = 0;
+    } else{
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"){
+            echo "File format not allowed";
+            $uploadOk = 0;
+        }        
+    }
+    
+if($uploadOk == 1){    
     $type = $_POST["type"]; 
+    
       
     if($type == "profile"){
         $userID = $_POST["accid"];
@@ -35,10 +49,7 @@ if(isset($_FILES['file'])){
             "Status" => "Error",
             "userId" => $_REQUEST["userId"]
             ]);
-        }
-        
-        
-        
+        }        
         
         
     }else if($type == "job"){
@@ -65,6 +76,8 @@ if(isset($_FILES['file'])){
             ]);
         }
     }else echo "Invalid request!";
-}
+
+} //uploadOk if-statement
+} //isset if-statement
 
 ?>
