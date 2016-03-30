@@ -49,9 +49,18 @@ if($uploadOk == 1){
             "Status" => "Error",
             "userId" => $_REQUEST["userId"]
             ]);
-        }        
+        }
         
+        $mediaID = saveInDB($target_dir); //returns the media id
+        $sql = "UPDATE PROFILES AS P, USER_ACCOUNTS AS U SET P.media_id='" . $mediaID . "' 
+        WHERE U.prof_id=P.prof_id AND U.accid='" . $userID . "'";
         
+        if (mysql_query($sql) === TRUE){
+            echo "profile media update success!";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+                
     }else if($type == "job"){
         $jobID = $_POST["jobid"];
                 
@@ -75,9 +84,37 @@ if($uploadOk == 1){
             "userId" => $_REQUEST["userId"]
             ]);
         }
+        
+        $mediaID = saveInDB($target_dir); //returns the media id
+        $sql = "UPDATE JOBS SET media_id='" . $mediaID . "' WHERE cust_accid='" . $userID . "'";
+        
+        if (mysql_query($sql) === TRUE){
+            echo "job media update success!";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+        
     }else echo "Invalid request!";
 
 } //uploadOk if-statement
 } //isset if-statement
+
+
+function saveInDB($filePath){
+    $insertTime = time();
+    $sql = "INSERT INTO MEDIA_FOLDERS (ts, path) VALUES (now(), '" . $filePath . "')";
+    if (mysql_query($sql) === TRUE){
+        echo "new media success!";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    
+    $sql = "SELECT media_id FROM MEDIA_FOLDERS WHERE path='" . $filePath . "'";
+    $result = mysql_query($sql);
+    $result = mysql_fetch_assoc($result);
+    return $result['media_id'];
+}
+    
+}
 
 ?>
