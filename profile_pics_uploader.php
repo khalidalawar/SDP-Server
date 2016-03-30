@@ -1,6 +1,16 @@
 
 
 <?php
+
+
+// 
+// TO BE REPLACED WITH picture_upload.php
+//
+//
+//
+//
+
+
 if(isset($_FILES['file'])){
     $type = $_POST["type"];
     $uname = $_POST["uname"];
