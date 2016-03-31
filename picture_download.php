@@ -1,5 +1,9 @@
 <?php
 
+//expecting a variable 'imagefor' with a value profile or job
+//if imagefor=profile, php expects a variable 'accid' with the account id
+//if imagefor=job, php expects a variable 'jobid' with the job id 
+
 $imagefor = $_POST['imagefor'];
 
 if($imagefor == "profile"){
@@ -13,10 +17,8 @@ if($imagefor == "profile"){
     $result = mysql_fetch_assoc($result);
     $path =  $result['path']; 
     
-    
-    echo json_encode([
-        "path" => $path
-    ]);
+    header("Content-type: image/jpeg"); //assuming the format is jpeg
+    readfile($path);
     
 } else if($imagefor == "job"){
     $jobtID = $_POST['jobid'];
