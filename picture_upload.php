@@ -100,6 +100,10 @@ if($uploadOk == 1){
 } //isset if-statement
 
 
+
+
+
+
 function saveInDB($filePath){
     $insertTime = time();
     $sql = "INSERT INTO MEDIA_FOLDERS (ts, path) VALUES (now(), '" . $filePath . "')";
