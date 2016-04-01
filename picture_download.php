@@ -33,7 +33,7 @@ if($imagefor == "profile"){
     foreach($files as $file){
         if(is_uploaded_file($file)){
             $imagePath = realpath($file);
-            array_push($imagesArray, {"name":$file, "image":$imagePath});
+            array_push($imagesArray, {"name" => $file, "image" => $imagePath});
         }
     }
     
