@@ -2,6 +2,9 @@
 
 <?php
 
+include_once 'database_connection.php';
+
+
 //expects a FILE with the label 'file'
 //also expects two values from the &_POST method:
 //variable type: either profile or job
@@ -10,10 +13,13 @@
 //in case 'type' = "job" :::
 //also expects a value jobId which is the jobid insted of accid
 
+
+/*
 if(isset($_FILES['file'])){
     $uploadOk = 1;
     
-    if(getimagesize($_FILES["image"]["tmp_name"]) === false){
+    
+    if(getimagesize($_FILES["image"]) === false){
         echo "File is not an image.";
         $uploadOk = 0;
     } else{
@@ -23,9 +29,14 @@ if(isset($_FILES['file'])){
         }        
     }
     
+    */
+    
+    $uploadOk = 1;
+    
 if($uploadOk == 1){    
     $type = $_POST["type"]; 
-    
+    echo $type;
+    echo "somethingelse"; 
       
     if($type == "profile"){
         $userID = $_POST["accid"];
@@ -97,7 +108,7 @@ if($uploadOk == 1){
     }else echo "Invalid request!";
 
 } //uploadOk if-statement
-} //isset if-statement
+//} //isset if-statement
 
 
 
