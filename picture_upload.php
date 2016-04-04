@@ -119,6 +119,6 @@ function saveInDB($filePath){
     return $result['media_id'];
 }
     
-}
+
 
 ?>

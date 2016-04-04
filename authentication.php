@@ -125,7 +125,9 @@ function authenticate_user($uname,$pass){
         
      }else{
 
-                 
+                  $res =  mysql_fetch_array($result);
+                  $accid = $res['accid'];
+                  
                  $rand_string = generateRandomString();
                  
                $sql = "INSERT INTO TOKENS (token,last_request) VALUES ('". $rand_string ."',now())";
@@ -138,12 +140,13 @@ function authenticate_user($uname,$pass){
                                 $result = mysql_fetch_array($result);
                             $tokid =  $result['id'];     
                             
+                           
                             
                             $update_query = "UPDATE USER_ACCOUNTS SET tokid='". $tokid ."' WHERE uname='".$uname . "'";
                             if (mysql_query($update_query) === TRUE) {
                               //  echo "tokid updated successfully";
                                     echo json_encode([
-                                    "uname" => $uname,
+                                    "accid" => $accid,
                                     "token" => $rand_string
                                     ]);
                             }else {   
