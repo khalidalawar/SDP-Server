@@ -35,13 +35,16 @@ if(isset($_FILES['file'])){
     
 if($uploadOk == 1){    
     $type = $_POST["type"]; 
-    echo $type;
-    echo "somethingelse"; 
+   
+    
+    $type = "profile"; //for testing purposes
+      
+      
       
     if($type == "profile"){
         $userID = $_POST["accid"];
         
-        $target_dir = "uploads/" . "PROF" . userID;
+        $target_dir = "uploads/" . "PROF" . $userID;
         if(!file_exists($target_dir)){
             mkdir($target_dir, 0777, true);
         }
