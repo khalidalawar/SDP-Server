@@ -34,21 +34,22 @@ if(isset($_FILES['file'])){
     $uploadOk = 1;
     
 if($uploadOk == 1){    
-    $type = $_POST["type"]; 
+    $type = $_POST['type']; 
    
     
-    $type = "profile"; //for testing purposes
+  //  $type = "profile"; //for testing purposes
       
       
       
     if($type == "profile"){
-        $userID = $_POST["accid"];
+        $userID = $_POST['accid'];
         
         $target_dir = "uploads/" . "PROF" . $userID;
         if(!file_exists($target_dir)){
             mkdir($target_dir, 0777, true);
         }
-        
+                $db_dir = $target_dir;
+
         $target_dir = $target_dir . "/" . basename($_FILES["file"]["name"]);
         
         if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_dir)){
@@ -65,7 +66,7 @@ if($uploadOk == 1){
             ]);
         }
         
-        $mediaID = saveInDB($target_dir); //returns the media id
+        $mediaID = saveInDB($db_dir); //returns the media id
         $sql = "UPDATE PROFILES AS P, USER_ACCOUNTS AS U SET P.media_id='" . $mediaID . "' 
         WHERE U.prof_id=P.prof_id AND U.accid='" . $userID . "'";
         
@@ -83,6 +84,7 @@ if($uploadOk == 1){
             mkdir($target_dir, 0777, true);
         }
         
+        $db_dir = $target_dir;
         $target_dir = $target_dir . "/" . basename($_FILES["file"]["name"]);
         
         if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_dir)){
@@ -99,7 +101,7 @@ if($uploadOk == 1){
             ]);
         }
         
-        $mediaID = saveInDB($target_dir); //returns the media id
+        $mediaID = saveInDB($db_dir); //returns the media id
         $sql = "UPDATE JOBS SET media_id='" . $mediaID . "' WHERE cust_accid='" . $userID . "'";
         
         if (mysql_query($sql) === TRUE){

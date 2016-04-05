@@ -1,13 +1,20 @@
 <?php
 
 
-echo json_encode(getProfile($_POST['prof_id']));
+echo json_encode(getProfile($_POST['accid']));
 
 
 
 
-function getProfile($prof_id){
-    $sql = "SELECT location, name, description, media_id FROM PROFILES WHERE prof_id='" . $pof_id . "'";
+function getProfile($accid){
+    
+    $sql = "SELECT prof_id FROM USER_ACCOUNTS where accid=". $accid;
+    $result = mysql_query($sql);
+    $result = mysql_fetch_array($sql);
+    
+    
+    
+    $sql = "SELECT location, name, description, media_id FROM PROFILES WHERE prof_id='" . $prof_id . "'";
     $result = mysql_query($sql);
     $result = mysql_fetch_assoc($result);
     
